@@ -1,0 +1,15 @@
+ services:
+     db:
+       image: mysql:8.4
+       container_name: php-test-db
+       restart: unless-stopped
+       environment:
+         MYSQL_ROOT_PASSWORD: rootpass
+         MYSQL_DATABASE: php_test
+         MYSQL_USER: app
+         MYSQL_PASSWORD: apppass
+       ports:
+         - "127.0.0.1:3306:3306"
+       volumes:
+         - ./data/mysql:/var/lib/mysql
+         - ./schema.mysql.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
